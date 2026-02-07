@@ -15,7 +15,7 @@ function DesignCard({ design }) {
     <div className="design-card">
       <div className="design-card-image">
         <img
-          src={`https://via.placeholder.com/400x300/E91E8C/FFFFFF?text=Nail+Design`}
+          src={design.image_url || `https://via.placeholder.com/400x300/E91E8C/FFFFFF?text=Nail+Design`}
           alt={design.description}
         />
       </div>

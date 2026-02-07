@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getOrders, getImageUrl } from '../services/api';
+import { getOrders } from '../services/api';
 import './Orders.css';
 
 const STATUS_ORDER = {
@@ -161,10 +161,10 @@ function Orders() {
                   </div>
 
                   <div className="order-body">
-                    {order.image_path && (
+                    {order.image_url && (
                       <div className="order-image-container">
                         <img
-                          src={getImageUrl(order.image_path)}
+                          src={order.image_url}
                           alt="Order design"
                           className="order-image"
                         />
