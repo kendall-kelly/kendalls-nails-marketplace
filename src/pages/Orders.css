@@ -257,6 +257,39 @@
   background-color: #444;
 }
 
+/* Messages Section */
+.order-messages-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.toggle-messages-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle-messages-button:hover {
+  background-color: #f0f0f0;
+  border-color: #E91E8C;
+}
+
+.toggle-messages-button:active {
+  background-color: #e8e8e8;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .orders-container h1 {

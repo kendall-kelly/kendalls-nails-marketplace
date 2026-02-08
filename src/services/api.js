@@ -172,3 +172,63 @@ export const createOrder = async (accessToken, orderData) => {
     throw error;
   }
 };
+
+/**
+ * Get messages for an order
+ * @param {string} accessToken - Auth0 access token with audience https://nails-api.kendall-kelly.com/
+ * @param {number} orderId - The order ID to get messages for
+ * @returns {Promise<Array>} Array of message objects
+ */
+export const getMessages = async (accessToken, orderId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/orders/${orderId}/messages`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || `Failed to fetch messages: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    throw error;
+  }
+};
+
+/**
+ * Send a message on an order
+ * @param {string} accessToken - Auth0 access token with audience https://nails-api.kendall-kelly.com/
+ * @param {number} orderId - The order ID to send the message to
+ * @param {string} text - The message text
+ * @returns {Promise<object>} The created message object
+ */
+export const sendMessage = async (accessToken, orderId, text) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/orders/${orderId}/messages`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || `Failed to send message: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    console.error('Error sending message:', error);
+    throw error;
+  }
+};

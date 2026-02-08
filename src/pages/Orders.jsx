@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { getOrders } from '../services/api';
+import Messages from '../components/Messages';
 import './Orders.css';
 
 const STATUS_ORDER = {
@@ -37,6 +38,7 @@ function Orders() {
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [expandedOrderId, setExpandedOrderId] = useState(null);
 
   const fetchOrders = async (page = 1) => {
     try {
@@ -203,6 +205,18 @@ function Orders() {
                         <span className="detail-value">{formatDate(order.updated_at)}</span>
                       </div>
                     )}
+
+                    <div className="order-messages-section">
+                      <button
+                        onClick={() => setExpandedOrderId(expandedOrderId === order.id ? null : order.id)}
+                        className="toggle-messages-button"
+                      >
+                        {expandedOrderId === order.id ? '▼' : '▶'} Messages {order.technician ? 'with Technician' : ''}
+                      </button>
+                      {expandedOrderId === order.id && (
+                        <Messages orderId={order.id} hasTechnician={!!order.technician} />
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
